@@ -167,7 +167,7 @@
             <div class="col-lg-7">
                 <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=1200" class="gallery-img shadow-lg">
                 <div class="mb-5">
-                    <h1 class="hero-title">UPGRADE YOUR STYLE,<br>UNLEASH YOUR VIBE.</h1>
+                    <h1 class="hero-title">DEFINISI GAYA TERBAIK,<br>WUJUDKAN KARAKTER ANDA.</h1>
                 </div>
 
                 <div class="modern-card p-4 p-md-5 mb-5 shadow-lg border border-warning">
@@ -186,18 +186,18 @@
                             <label class="form-label text-secondary">PILIH TREATMENT</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-cut"></i></span>
-                                <select name="service_id" class="form-select" required>
-                                    <option value="" disabled selected>-- PILIH LAYANAN KAMI --</option>
-                                    @foreach($services as $service)
-                                        <option value="{{ $service->id }}">
-                                            {{ strtoupper($service->name) }} — Rp {{ number_format($service->price, 0, ',', '.') }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                    <select name="service_id" class="form-control" required>
+                                        <option value="">-- PILIH LAYANAN KAMI --</option>
+                                        @foreach($services as $service)
+                                            <option value="{{ $service->id }}">
+                                                {{ strtoupper($service->name) }} — Rp {{ number_format($service->price, 0, ',', '.') }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-premium w-100 mt-3 shadow">
+                        <button type="submit" class="btn btn-premium w-100 mt-3 shadow" style="color: black !important;">
                             AMBIL ANTRIAN SEKARANG <i class="fas fa-arrow-right ms-2"></i>
                         </button>
                     </form>

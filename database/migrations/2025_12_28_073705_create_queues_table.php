@@ -10,7 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void {
-        Schema::create('queues', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('customer_name');
             $table->foreignId('service_id')->constrained()->onDelete('cascade');

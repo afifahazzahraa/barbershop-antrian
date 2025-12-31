@@ -182,13 +182,14 @@
             <table class="table align-middle">
                 <thead>
                     <tr>
-                        <th width="150" class="text-center">NOMOR</th>
+                        <th width="100" class="text-center">NOMOR</th>
                         <th>PELANGGAN</th>
                         <th>LAYANAN</th>
-                        <th width="180">STATUS</th>
-                        <th width="220" class="text-center">KONTROL</th>
+                        <th>HARGA</th> <th width="150">STATUS</th>
+                        <th width="200" class="text-center">KONTROL</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     @forelse($queues as $q)
                     <tr>
@@ -196,41 +197,33 @@
                             <span class="queue-id">{{ str_pad($q->queue_number, 2, '0', STR_PAD_LEFT) }}</span>
                         </td>
                         <td>
-                            <div class="customer-name">{{ $q->customer_name }}</div>
-                            <div class="text-muted fw-bold small"><i class="far fa-clock me-1"></i> JAM: {{ $q->created_at->format('H:i') }}</div>
+                            <div class="customer-name" style="color: white !important;">{{ $q->customer_name }}</div>
+                            <div class="text-muted fw-bold small"><i class="far fa-clock me-1"></i> {{ $q->created_at->format('H:i') }}</div>
                         </td>
                         <td>
                             <span class="badge badge-info-custom">
-                                {{ optional($q->service)->name ?? 'CUKUR STANDAR' }}
-                            </span>
+                                {{ $q->service->name }} </span>
                         </td>
+                        <td class="fw-bold text-warning">
+                            Rp {{ number_format($q->service->price, 0, ',', '.') }} </td>
                         <td>
                             @if($q->status == 'waiting')
-                                <span class="text-warning fw-bolder"><i class="fas fa-circle me-1 small"></i> MENUNGGU</span>
+                                <span class="text-warning fw-bolder">MENUNGGU</span>
                             @elseif($q->status == 'processing')
-                                <span class="text-info fw-bolder"><i class="fas fa-spinner fa-spin me-1 small"></i> DIPROSES</span>
-                            @elseif($q->status == 'completed')
-                                <span class="text-success fw-bolder"><i class="fas fa-check-circle me-1 small"></i> SELESAI</span>
+                                <span class="text-info fw-bolder">DIPROSES</span>
+                            @else
+                                <span class="text-success fw-bolder">SELESAI</span>
                             @endif
                         </td>
                         <td class="text-center">
                             @if($q->status == 'waiting')
-                                <a href="{{ route('queue.update', [$q->id, 'processing']) }}" class="btn btn-call btn-action w-100">
-                                    Panggil Sekarang
-                                </a>
+                                <a href="{{ route('queue.update', [$q->id, 'processing']) }}" class="btn btn-call btn-action w-100">PANGGIL</a>
                             @elseif($q->status == 'processing')
-                                <a href="{{ route('queue.update', [$q->id, 'completed']) }}" class="btn btn-done btn-action w-100">
-                                    Selesaikan
-                                </a>
+                                <a href="{{ route('queue.update', [$q->id, 'completed']) }}" class="btn btn-done btn-action w-100">SELESAI</a>
                             @endif
                         </td>
                     </tr>
                     @empty
-                    <tr>
-                        <td colspan="5" class="text-center py-5 text-muted">
-                            <h4 class="fw-bold">Belum Ada Antrian</h4>
-                        </td>
-                    </tr>
                     @endforelse
                 </tbody>
             </table>
